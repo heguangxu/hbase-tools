@@ -15,9 +15,14 @@ public class BeanFactory {
 		return BeanFactoryHolder.instance;
 	}
 
-	public  <T> T getBeanInstance(Class<T> type) {
-		ServiceLoader<T> serviceLoad = ServiceLoader.load(type, getInstance()
-				.getClass().getClassLoader());
+	/**
+	 *
+	 * @param type
+	 * : RowKeyGenerator.class
+	 * @return
+	 */
+	public <T> T getBeanInstance(Class<T> type) {
+		ServiceLoader<T> serviceLoad = ServiceLoader.load(type, getInstance().getClass().getClassLoader());
 		if (serviceLoad != null) {
 			for (T ele : serviceLoad)
 				return ele;
@@ -31,8 +36,11 @@ public class BeanFactory {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(Bytes.toStringBinary(BeanFactory.getInstance().getBeanInstance(
-				RowKeyGenerator.class).nextId()));
+		/**
+		 * 
+		 */
+		System.out.println(
+				Bytes.toStringBinary(BeanFactory.getInstance().getBeanInstance(RowKeyGenerator.class).nextId()));
 
 	}
 
